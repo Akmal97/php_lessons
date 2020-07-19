@@ -1,0 +1,70 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font: normal 14px Arial, sans-serif;
+}
+.site_wrapper {
+  width: 980px;
+  margin: 0 auto;
+
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  background: yellow;
+  border-bottom: 1px solid #000;
+}
+a.menu_link {
+  display: inline-block;
+  padding: 7px 15px;
+  color: #000;
+  font-size: 16px;
+}
+a.menu_link:hover {
+  text-decoration: none;
+}
+.products_wrapper__list {
+  display: flex;
+  margin: 0 -15px;
+  flex-wrap: wrap;
+}
+.products_wrapper__list_item {
+  width: calc(25% - 30px);
+  margin: 0 15px 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 3px #eee;
+  box-sizing: border-box;
+  padding: 20px;
+  position: relative;
+}
+.product_image {
+  padding-top: 56%;
+  background: url("../images/noimage.svg") 50% no-repeat;
+  margin-bottom: 10px;
+}
+.products_wrapper__list_item.k0 .product_image {
+  background: url('../images/proig.jpg') 50%/contain no-repeat;
+}
+.products_wrapper__list_item.k1 .product_image {
+  background: url('../images/muz_center.jpg') 50%/contain no-repeat;
+}
+.products_wrapper__list_item.k2 .product_image {
+  background: url('../images/plita.jpg') 50%/contain no-repeat;
+}
+.products_wrapper__list_item.k3 .product_image {
+  background: url('../images/indesit.jpg') 50%/contain no-repeat;
+}
+.product_name a {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  padding: 5px 0;
+  color: #000;
+}
+.product_name a:hover {
+  text-decoration: underline;
+}
