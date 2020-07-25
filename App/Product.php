@@ -1,7 +1,16 @@
 <?php
 
-function get_product_list($connect) {
-    $query = "SELECT p.*, c.name AS category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id";
+function get_product_list_count($connect) {
+    $query = "SELECT COUNT(1) as c FROM products p LEFT JOIN categories c ON p.category_id = c.id";
+    $result = query($connect, $query);
+
+    $row = mysqli_fetch_assoc($result);
+
+    return (int) ($row['c'] ?? 0);
+}
+
+function get_product_list($connect, int $limit = 100, int $offset = 0) {
+    $query = "SELECT p.*, c.name AS category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id LIMIT $offset, $limit";
     $result = query($connect, $query);
 
     $products = [];
@@ -10,6 +19,18 @@ function get_product_list($connect) {
     }
     return $products;
 }
+
+function get_product_list_by_category_id($connect, $category_id) {
+    $query = "SELECT p.*, c.name AS category_name FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE p.category_id = $category_id";
+    $result = query($connect, $query);
+
+    $products = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $products[] = $row;
+    }
+    return $products;
+}
+
 function get_product_by_id($connect, $id) {
     $query = "SELECT p.*, c.id AS category_id FROM products p LEFT JOIN categories c ON p.category_id = c.id WHERE p.id = $id";
     $result = query($connect, $query);
@@ -22,13 +43,13 @@ function get_product_by_id($connect, $id) {
 }
 function update_product_by_id($connect, $id, $product) {
     $name = $product['name'] ?? '';
-    $category_name = $product['category_name'] ?? '';
+    $category_id = $product['category_id'] ?? '';
     $article = $product['article'] ?? '';
     $price = $product['price'] ?? '';
     $amount = $product['amount'] ?? '';
     $description = $product['description'] ?? '';
 
-    $query = "UPDATE products SET name = '$name', category_name = '$category_name', article = '$article', price = '$price', amount = '$amount', description = '$description' WHERE id = $id";
+    $query = "UPDATE products SET name = '$name', category_id = '$category_id', article = '$article', price = '$price', amount = '$amount', description = '$description' WHERE id = $id";
     query($connect, $query);
 
     return mysqli_affected_rows($connect);

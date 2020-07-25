@@ -1,18 +1,9 @@
-{include file="header.tpl" h1="Cписок товаров"}
-<p>
+{include file="header.tpl" h1=$current_category.name}
+{*}<p>
     <a href="/products/add">Добавить</a>
-</p>
+</p>{*}
 
 <div class="products_wrapper">
-    <nav>
-        <ul class="pagination">
-            {section loop=$pages_count name=pagination}
-                <li class="page-item{if $smarty.get.p == $smarty.section.pagination.iteration} active{/if}">
-                    <a href="{$smarty.server.PATH_INFO}?p={$smarty.section.pagination.iteration}" class="page-link">{$smarty.section.pagination.iteration}</a>
-                </li>
-            {/section}
-        </ul>
-    </nav>
     <div class="products_wrapper__list">
         {foreach from=$products item=e key=k}
             <div class="products_wrapper__list_item k{$k}">
