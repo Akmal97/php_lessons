@@ -1,4 +1,5 @@
 {include file="header.tpl" h1="Cписок товаров"}
+
 <p>
     <a href="/products/add">Добавить</a>
 </p>
