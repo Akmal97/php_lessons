@@ -1,12 +1,13 @@
-<?php /* Smarty version 2.6.31, created on 2020-07-25 19:13:43
+<?php /* Smarty version 2.6.31, created on 2020-07-31 15:53:46
          compiled from products/index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'nl2br', 'products/index.tpl', 23, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'nl2br', 'products/index.tpl', 28, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array('h1' => "Cписок товаров")));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
+
 <p>
     <a href="/products/add">Добавить</a>
 </p>
@@ -53,7 +54,15 @@ $this->_sections['pagination']['last']       = ($this->_sections['pagination']['
 ?>
             <div class="products_wrapper__list_item k<?php echo $this->_tpl_vars['k']; ?>
 ">
-                <div class="product_image"></div>
+                <div class="product_image">
+                    <?php $_from = $this->_tpl_vars['e']['images']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['image']):
+?>
+                    <img src="<?php echo $this->_tpl_vars['image']['path']; ?>
+" alt="<?php echo $this->_tpl_vars['image']['name']; ?>
+">
+                    <?php endforeach; endif; unset($_from); ?>
+                </div>
                 <div class="product_name">
                     <a href="#"><?php echo $this->_tpl_vars['e']['name']; ?>
 </a>
@@ -66,7 +75,7 @@ $this->_sections['pagination']['last']       = ($this->_sections['pagination']['
 </div>
                 <div class="product_price">Цена <?php echo $this->_tpl_vars['e']['price']; ?>
  руб.</div>
-                <div class="product_amount">Кол-во на складе<?php echo $this->_tpl_vars['e']['amount']; ?>
+                <div class="product_amount">Кол-во на складе <?php echo $this->_tpl_vars['e']['amount']; ?>
  шт.</div>
                 <div class="hidden_buttons">
                     <a href="/products/edit?id=<?php echo $this->_tpl_vars['e']['id']; ?>

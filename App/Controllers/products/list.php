@@ -1,21 +1,14 @@
 <?php
 
-$current_page = (int) ($_GET['p'] ?? 0);
+$current_page = Request::getIntFromGet('p', 1);
 
 $limit = 2;
 $offset = ($current_page - 1) * $limit;
 
-if ($offset < 0) {
-    $offset = 0;
-}
-
-$products_count = get_product_list_count($connect);
-
+$products_count = Product::getListCount();
 $pages_count = ceil($products_count / $limit);
 
-$products = get_product_list($connect, $limit, $offset);
-
-
+$products = Product::getList($limit, $offset);
 
 $smarty->assign('pages_count', $pages_count);
 $smarty->assign('products', $products);

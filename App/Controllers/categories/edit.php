@@ -1,21 +1,20 @@
 <?php
 
-$id = $_GET['id'] ?? 0;
-$id = (int) $id;
+$id = Request::getIntFromGet('id');
 
 $category =[];
 
 if ($id) {
-    $category = get_category_by_id($connect, $id);
+    $category = Category::getCategoryById($id);
 }
 
 
-if (!empty($_POST)) {
-    $category = get_category_from_post();
-    $edited = update_category_by_id($connect, $id, $category);
+if (Request::isPost()) {
+    $category = Category::getCategoryFromPost();
+    $edited = Category::updateCategoryById($id, $category);
 
     if ($edited) {
-        header('location: /categories/list');
+        Response::redirect('/categories/list');
     } else {
         die("some insert error");
     }

@@ -10,7 +10,7 @@ if ($is_index) {
     $path_info .= 'list';
 }
 
-$categories = get_category_list($connect);
+$categories = Category::getCategoryList();
 $smarty->assign('categories_shared', $categories);
 
 $controller_path = $_SERVER['DOCUMENT_ROOT'] . '/../App/Controllers' . $path_info . '.php';

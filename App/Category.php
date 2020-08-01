@@ -1,52 +1,48 @@
 <?php
 
-function get_category_list($connect) {
-    $query = "SELECT * FROM categories";
-    $result = query($connect, $query);
+class Category {
+    public static function getCategoryList()
+    {
+        $query = "SELECT * FROM categories";
 
-    $categories = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $categories[] = $row;
+        return Db::fetchAll($query);
     }
-    return $categories;
-}
-function get_category_by_id($connect, $id) {
-    $query = "SELECT * FROM categories WHERE id = $id";
-    $result = query($connect, $query);
 
-    $category = mysqli_fetch_assoc($result);
-    if (is_null($category)) {
-        $category = [];
+    public static function getCategoryById($id)
+    {
+        $query = "SELECT * FROM categories WHERE id = $id";
+
+        return Db::fetchRow($query);
     }
-    return $category;
-}
-function update_category_by_id($connect, $id, $category) {
-    $name = $category['name'] ?? '';
-    $query = "UPDATE categories SET name = '$name' WHERE id = $id";
-    query($connect, $query);
 
+    public static function updateCategoryById(int $id, array $category)
+    {
+        if (isset($category['id'])) {
+            unset($category['id']);
+        }
 
-    return mysqli_affected_rows($connect);
-}
-function add_category($connect, $category) {
-    $name = $category['name'] ?? '';
+        return Db::update('categories', $category, "id = $id");
+    }
 
-    $query = "INSERT INTO categories(name) VALUES ('$name')";
+    public static function addCategory($category)
+    {
+        if (isset($category['id'])) {
+            unset($category['id']);
+        }
 
-    query($connect, $query);
+        return Db::insert('categories', $category);
+    }
 
-    return mysqli_affected_rows($connect);
-}
-function delete_category_by_id($connect, $id) {
-    $query = "DELETE FROM categories WHERE id = $id";
-    query($connect, $query);
+    public static function deleteCategoryById(int $id)
+    {
+        return Db::delete('categories', "id = $id");
+    }
 
-    return mysqli_affected_rows($connect);
-}
-
-function get_category_from_post() {
-    return [
-        'id' => $_POST['id'] ?? '',
-        'name' => $_POST['name'] ?? '',
-    ];
+    public static function getCategoryFromPost()
+    {
+        return [
+            'id' => Request::getIntFromPost('id', false),
+            'name' => Request::getStrFromPost('name'),
+        ];
+    }
 }

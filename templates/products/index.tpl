@@ -17,7 +17,11 @@
     <div class="products_wrapper__list">
         {foreach from=$products item=e key=k}
             <div class="products_wrapper__list_item k{$k}">
-                <div class="product_image"></div>
+                <div class="product_image">
+                    {foreach from=$e.images item=image}
+                    <img src="{$image.path}" alt="{$image.name}">
+                    {/foreach}
+                </div>
                 <div class="product_name">
                     <a href="#">{$e.name}</a>
                 </div>
@@ -25,7 +29,7 @@
                 <div class="product_category">{$e.category_name}</div>
                 <div class="product_article">Артикул: {$e.article}</div>
                 <div class="product_price">Цена {$e.price} руб.</div>
-                <div class="product_amount">Кол-во на складе{$e.amount} шт.</div>
+                <div class="product_amount">Кол-во на складе {$e.amount} шт.</div>
                 <div class="hidden_buttons">
                     <a href="/products/edit?id={$e.id}">Редактировать</a>
                     <form action="/products/delete" method="post" style="display: inline;">

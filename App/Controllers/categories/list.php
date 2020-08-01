@@ -1,6 +1,6 @@
 <?php
 
-$categories = get_category_list($connect);
+$categories = Category::getCategoryList();
 
 $smarty->assign('categories', $categories);
 $smarty->display('categories/index.tpl');
