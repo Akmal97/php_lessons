@@ -135,6 +135,14 @@ class Db
 
         return Db::affectedRows();
     }
+
+
+    public static function escape(string $value)
+    {
+        $connect = static::getConnect();
+
+        return mysqli_real_escape_string($connect, $value);
+    }
     
     private static function connect()
     {

@@ -56,6 +56,9 @@ a.menu_link:hover {
 .product_name a:hover {
   text-decoration: underline;
 }
+.product_image img {
+  max-height: 50px;
+}
 .hidden_buttons {
   position: relative;
   bottom: -2000px;

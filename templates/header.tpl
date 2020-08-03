@@ -20,6 +20,7 @@
     <ul class="top_menu">
         <li><a href="/products/" class="menu_link">Список товаров</a></li>
         <li><a href="/categories/" class="menu_link">Список категорий</a></li>
+        <li><a href="/import/index" class="menu_link">Импорт товаров</a></li>
     </ul>
     <div class="container">
         <div class="row">
